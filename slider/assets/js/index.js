@@ -1,6 +1,6 @@
 const slides = [
   {
-    src: "https://images.pexels.com/photos/624015/pexels-photo-624015.jpeg",
+    src: "hps://images.pexels.com/photos/624015/pexels-photo-624015.jpeg",
     alt: "landscape1",
   },
   {
@@ -16,44 +16,38 @@ const slides = [
     alt: "landscape4",
   },
 ];
-
-let currentSlideIndex = 0;
-
 const sliderImg = document.querySelector(".slider-img");
-
-updateSlider(currentSlideIndex);
-
-sliderImg.src = slides[currentSlideIndex].src;
-
-sliderImg.alt = slides[currentSlideIndex].alt;
-
 const [prevBtn, nextBtn] = document.querySelectorAll("button");
-
-prevBtn.onclick = () => {
-  // if (currentSlideIndex > 0) {
-  //   currentSlideIndex -= 1;
-  // } else {
-  //   currentSlideIndex = slides.length - 1;
-  // }
-
-  currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
-
-  updateSlider(currentSlideIndex);
-};
-
-nextBtn.onclick = () => {
-  // if (currentSlideIndex < slides.length - 1) {
-  //   currentSlideIndex++;
-  // } else {
-  //   currentSlideIndex = 0;
-  // }
-
-  currentSlideIndex = (currentSlideIndex + 1) % slides.length;
-
-  updateSlider(currentSlideIndex);
-};
-
-function updateSlider(currentSlideIndex) {
-  sliderImg.src = slides[currentSlideIndex].src;
-  sliderImg.alt = slides[currentSlideIndex].alt;
+function updateSlider(currentIndex) {
+  sliderImg.src = slides[currentIndex].src;
+  sliderImg.alt = slides[currentIndex].alt;
 }
+
+function sliderError() {
+  sliderImg.src =
+    "https://lightwidget.com/wp-content/uploads/localhost-file-not-found.jpg";
+  sliderImg.alt = "unavaible img";
+}
+
+sliderImg.onerror = () => {
+  sliderError();
+};
+
+try {
+  const slider = new Slider(slides, 0);
+  updateSlider(slider.currentIndex);
+
+  prevBtn.onclick = () => {
+    slider.decIndex();
+    updateSlider(slider.currentIndex);
+  };
+
+  nextBtn.onclick = () => {
+    slider.incIndex();
+    updateSlider(slider.currentIndex);
+  };
+} catch (err) {
+  sliderImg.src = sliderError();
+}
+
+console.log("affter error");
