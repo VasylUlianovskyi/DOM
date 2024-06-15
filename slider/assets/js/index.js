@@ -1,6 +1,6 @@
 const slides = [
   {
-    src: "hps://images.pexels.com/photos/624015/pexels-photo-624015.jpeg",
+    src: "https://images.pexels.com/photos/624015/pexels-photo-624015.jpeg",
     alt: "landscape1",
   },
   {
@@ -37,15 +37,15 @@ try {
   const slider = new Slider(slides, 0);
   updateSlider(slider.currentIndex);
 
-  prevBtn.onclick = () => {
-    slider.decIndex();
-    updateSlider(slider.currentIndex);
-  };
+  function changeSlideHandler(direction = "next") {
+    return () => {
+      slider[direction === "prev" ? "decIndex" : "incIndex"]();
+      updateSlider(slider.currentIndex);
+    };
+  }
 
-  nextBtn.onclick = () => {
-    slider.incIndex();
-    updateSlider(slider.currentIndex);
-  };
+  prevBtn.onclick = changeSlideHandler("prev");
+  nextBtn.onclick = changeSlideHandler("next");
 } catch (err) {
   sliderImg.src = sliderError();
 }

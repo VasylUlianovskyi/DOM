@@ -24,7 +24,8 @@
   height: 30px;
   border-radius: 50%;
   border: none;
-  background-color: rgba(240, 248, 255, 0.253);
+  background-color: rgba(240, 248, 255);
+  opacity: 0.2;
 }
 
 .prev-btn {
@@ -33,8 +34,8 @@
 
 .prev-btn:hover,
 .next-btn:hover {
-  background-color: rgba(240, 248, 255, 0.562);
   transition: 0.2s linear background-color;
+  opacity: 0.6;
 }
 
 .next-btn {
