@@ -21,6 +21,8 @@ let currentSlideIndex = 0;
 
 const sliderImg = document.querySelector(".slider-img");
 
+updateSlider(currentSlideIndex);
+
 sliderImg.src = slides[currentSlideIndex].src;
 
 sliderImg.alt = slides[currentSlideIndex].alt;
@@ -28,23 +30,30 @@ sliderImg.alt = slides[currentSlideIndex].alt;
 const [prevBtn, nextBtn] = document.querySelectorAll("button");
 
 prevBtn.onclick = () => {
-  if (currentSlideIndex > 0) {
-    currentSlideIndex -= 1;
-  } else {
-    currentSlideIndex = slides.length - 1;
-  }
+  // if (currentSlideIndex > 0) {
+  //   currentSlideIndex -= 1;
+  // } else {
+  //   currentSlideIndex = slides.length - 1;
+  // }
 
-  sliderImg.src = slides[currentSlideIndex].src;
-  sliderImg.alt = slides[currentSlideIndex].alt;
+  currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+
+  updateSlider(currentSlideIndex);
 };
 
 nextBtn.onclick = () => {
-  if (currentSlideIndex < slides.length - 1) {
-    currentSlideIndex++;
-  } else {
-    currentSlideIndex = 0;
-  }
+  // if (currentSlideIndex < slides.length - 1) {
+  //   currentSlideIndex++;
+  // } else {
+  //   currentSlideIndex = 0;
+  // }
 
+  currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+
+  updateSlider(currentSlideIndex);
+};
+
+function updateSlider(currentSlideIndex) {
   sliderImg.src = slides[currentSlideIndex].src;
   sliderImg.alt = slides[currentSlideIndex].alt;
-};
+}
