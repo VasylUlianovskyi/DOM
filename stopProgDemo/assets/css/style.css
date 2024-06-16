@@ -1,0 +1,31 @@
+body {
+  font-family: sans-serif;
+}
+
+main {
+  padding: 20px;
+  background-color: #efa39f;
+}
+
+article {
+  padding: 20px;
+  background-color: #91c2a3;
+}
+
+button {
+  margin: 20px;
+  padding: 0px;
+  background-color: transparent;
+  display: block;
+  border: none;
+  font-size: 20px;
+}
+
+.redHeart {
+  color: red
+}
+
+
+.newArtColor {
+  background-color: #2f5e46;
+}
