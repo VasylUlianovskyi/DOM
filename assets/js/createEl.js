@@ -1,30 +1,37 @@
 "use strict";
 
-const newsItem = {
-  title: "News Title",
-  body: "News Body News Body News Body News Body News Body News Body News Body News Body News Body",
-  date: "2024-05-10",
-};
+const USERS_URL = "https://randomuser.me/api/?results=5";
+const rootEl = document.querySelector("#root");
 
-const sectionEl = document.querySelector(".section");
+fetch(USERS_URL)
+  .then((response) => response.json())
+  .then(({ results }) => genSingleUser(results[0]))
+  .catch((err) => console.log(err));
 
-const articleEl = document.createElement("article");
+function genSingleUser({
+  picture: { large: imgSrc },
+  name: { first, last },
+  dob: { age },
+}) {
+  const userCard = document.createElement("article");
+  rootEl.append(userCard);
+  userCard.classList.add("userCard");
 
-sectionEl.append(articleEl);
+  const userImg = document.createElement("img");
+  userImg.classList.add("userImg");
+  userImg.src = imgSrc;
 
-// const h3El = document.createElement("h3");
-// h3El.textContent = newsItem.title;
-const h3El = createNewElement("h3", newsItem.title);
-const pEl = createNewElement("p", newsItem.body);
-const dateEl = createNewElement("p", newsItem.date);
+  const userName = document.createElement("h2");
+  userName.textContent = `${first} ${last}`;
+  userName.classList.add("userName");
 
-// const pEl = document.createElement("p");
-// pEl.textContent = newsItem.body;
+  const userAge = document.createElement("p");
+  userAge.textContent = age;
+  userAge.classList.add("userAge");
 
-articleEl.append(h3El, pEl, dateEl);
+  const deleteButton = document.createElement("button");
+  deleteButton.classList.add("trashIcon");
+  deleteButton.innerHTML = `<i class="fa-solid fa-trash"></i>`;
 
-function createNewElement(type, content) {
-  const newElement = document.createElement(type);
-  newElement.textContent = content;
-  return newElement;
+  userCard.append(userImg, userName, userAge, deleteButton);
 }

@@ -1,4 +1,4 @@
-.task {
+/* .task {
   padding: 15px;
   margin: 20px;
   border-radius: 15px;
@@ -26,13 +26,14 @@
 
 .newBorder {
   box-shadow: none;
-  border: none
+  border: none 
 }
 
+/* 
 div {
   padding: 20px;
   border: 1px solid red;
-}
+} */
 
 /* article {
   margin: 100px auto 0;
@@ -43,3 +44,45 @@ div {
   border-radius: 25px;
   box-shadow: 0 0 5px purple;
 } */
+
+
+:root {
+  font-family: sans-serif;
+  --user-img-size: 100px;
+}
+
+.userCard {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  box-shadow: grey 0 0 5px;
+  margin: 10px;
+  padding: 15px;
+  border-radius: 15px;
+}
+
+.userImg {
+  width: var(--user-img-size);
+  height: var(--user-img-size);
+  border-radius: 50%;
+  border: 2px solid violet;
+}
+
+.userName {}
+
+.userAge {
+  color: grey;
+}
+
+.trashIcon {
+  margin-left: auto;
+  border: none;
+  background: none;
+  font-size: 24px;
+  color: grey;
+  cursor: pointer;
+}
+
+.trashIcon:hover {
+  color: black;
+}
