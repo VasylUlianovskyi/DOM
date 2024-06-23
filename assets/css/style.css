@@ -84,5 +84,6 @@ div {
 }
 
 .trashIcon:hover {
-  color: black;
+  font-size: 30px;
+  color: red;
 }

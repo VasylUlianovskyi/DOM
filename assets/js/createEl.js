@@ -17,21 +17,32 @@ function genSingleUser({
   rootEl.append(userCard);
   userCard.classList.add("userCard");
 
-  const userImg = document.createElement("img");
-  userImg.classList.add("userImg");
-  userImg.src = imgSrc;
+  const imgEl = createNewImg(imgSrc, `${first} ${last}`, "userImg");
+  const userName = createNewElement("h2", `${first} ${last}`, "userName");
+  const userAge = createNewElement("p", age, "userAge");
 
-  const userName = document.createElement("h2");
-  userName.textContent = `${first} ${last}`;
-  userName.classList.add("userName");
+  const trashIcon = document.createElement("button");
+  trashIcon.classList.add("trashIcon");
+  trashIcon.innerHTML = `<i class="fa-solid fa-trash"></i>`;
 
-  const userAge = document.createElement("p");
-  userAge.textContent = age;
-  userAge.classList.add("userAge");
+  trashIcon.onclick = function () {
+    this.parentElement.remove();
+  };
 
-  const deleteButton = document.createElement("button");
-  deleteButton.classList.add("trashIcon");
-  deleteButton.innerHTML = `<i class="fa-solid fa-trash"></i>`;
+  userCard.append(imgEl, userName, userAge, trashIcon);
+}
 
-  userCard.append(userImg, userName, userAge, deleteButton);
+function createNewImg(src, alt, className) {
+  const newImg = document.createElement("img");
+  newImg.src = src;
+  newImg.alt = alt;
+  newImg.classList.add(className);
+  return newImg;
+}
+
+function createNewElement(type, content, className) {
+  const newElement = document.createElement(type);
+  newElement.textContent = content;
+  newElement.classList.add(className);
+  return newElement;
 }
