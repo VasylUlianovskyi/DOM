@@ -1,12 +1,34 @@
 "use strict";
 
-const USERS_URL = "https://randomuser.me/api/?results=5";
+const USERS_URL = "https://randomuser.me/api/?results=5&seed=2024";
 const rootEl = document.querySelector("#root");
 
-fetch(USERS_URL)
-  .then((response) => response.json())
-  .then(({ results }) => genSingleUser(results[0]))
-  .catch((err) => console.log(err));
+let currentPage = 1;
+
+loadUsers(currentPage);
+
+const [prevBtn, nextBtn] = document.querySelectorAll(".navBtn");
+prevBtn.onclick = () => {
+  if (currentPage > 1) {
+    currentPage--;
+    loadUsers(currentPage);
+  }
+};
+
+nextBtn.onclick = () => {
+  currentPage++;
+  loadUsers(currentPage);
+};
+
+function loadUsers(currentPage) {
+  rootEl.textContent = "";
+  fetch(`${USERS_URL}&page=${currentPage}`)
+    .then((response) => response.json())
+    .then(({ results }) => results.forEach((r) => genSingleUser(r)))
+    .catch((err) => console.log(err));
+}
+
+loadUsers(currentPage);
 
 function genSingleUser({
   picture: { large: imgSrc },
